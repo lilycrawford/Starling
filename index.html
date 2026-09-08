@@ -1,0 +1,118 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORKING-TITLE</title>
+    <link rel="icon" type="image/x-icon" href="assets/Queen's Icons 1-12.png">
+    <link rel="stylesheet" href="style/styles.css">
+    <script type="module" src="js/script.js"></script>
+</head>
+
+<body>
+
+    <!-- =-=-=-=-= NAV BAR =-=-=-=-= -->
+    <nav>
+        <div class="nav-section">Options: </div>
+
+        <div class="nav-section">
+            <button class="navButton" type="button" onclick="document.getElementById('guide-dialog').showModal()">Setup
+                Guide</button>
+        </div>
+        <div class="nav-section">
+            <button class="navButton" onclick="stopServer()">Stop Server</button>
+        </div>
+
+    </nav>
+
+    <!-- =-=-=-=-= HEADER =-=-=-=-= -->
+    <header>
+        <div class="header-title">WorkingTitle <span>Dashboard</span></div>
+        <!-- <div class="header-badge">Distributed Antenna Network for Timing & Error Surveillance</div> -->
+    </header>
+
+    <!-- =-=-=-=-= SETUP GUIDE (collapsed by default) =-=-=-=-= -->
+    <div id="page-container">
+
+        <!-- setup gyide popup -->
+        <dialog id="guide-dialog">
+
+            <form method="dialog">
+                <div class="actions-btn">
+                    <button type="submit">&times;</button>
+                </div>
+                <div id="setup-guide" class="card setup-card">
+                    <h3>Setup Guide</h3>
+
+                    <div class="setup-body">
+
+                        <h2>Overview</h2>
+                        <p>x</p>
+
+                        <h2>Step 1. x</h2>
+                        <p>Normal text
+                            <code>Code text</code>
+                        </p>
+
+                        <table class="stats-table setup-table">
+                            <thead>
+                                <tr>
+                                    <th>x</th>
+                                    <th>(0) Input</th>
+                                    <th>(1) Output</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Type</td>
+                                    <td>TCP Client</td>
+                                    <td>TCP Server</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                        <p class="setup-note">setup note</p>
+
+                        <p class="setup-note">note <code>code</code></p>
+
+                    </div>
+                </div>
+
+                <div class="actions-btn">
+                    <button type="submit">Close</button>
+                </div>
+            </form>
+        </dialog>
+
+
+        <div class="dashboard-grid">
+
+            <!-- =-=-=-=-= CARD 1 =-=-=-=-= -->
+            <div class="card">
+                <h1>Card 1</h1>
+            </div>
+
+            <!-- =-=-=-=-= CARD 2 =-=-=-=-= -->
+            <div class="card">
+                <h1>Card 2</h1>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- =-=-=-=-= CARD 3 =-=-=-=-= -->
+            <div class="card">
+                <h1>Card 3</h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- =-=-=-=-= FOOTER =-=-=-=-= -->
+    <footer>
+        <p>Footer</p>
+    </footer>
+</body>
+
+</html>
