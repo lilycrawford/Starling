@@ -1,0 +1,9 @@
+{
+    "wavePath": "C:/mnt/OpenPMU-usb0/WaveLogs/", 
+    "mqttBroker": "127.0.0.1",
+    "mqttPort": 1883,
+    "mqttTopicSV": "OpenPMU/ADC_SV",
+    "recMask": [0,1],
+    "allowDeletion": "True",
+    "daysToKeep": 7
+}

@@ -5,9 +5,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WORKING-TITLE</title>
+    <title>PheasantPhasor</title>
     <link rel="icon" type="image/x-icon" href="assets/Queen's Icons 1-12.png">
     <link rel="stylesheet" href="style/styles.css">
+    <link rel="stylesheet" href="vendor/uPlot.min.css">
+    <script src="vendor/uPlot.iife.min.js"></script>
     <script type="module" src="js/script.js"></script>
 </head>
 
@@ -29,14 +31,15 @@
 
     <!-- =-=-=-=-= HEADER =-=-=-=-= -->
     <header>
-        <div class="header-title">WorkingTitle <span>Dashboard</span></div>
-        <!-- <div class="header-badge">Distributed Antenna Network for Timing & Error Surveillance</div> -->
+        <!-- <img src="assets/Queen's Icons 1-12.png" alt="placeholder" style="width: 5rem; aspect-ratio: 1/1;"> -->
+        <div class="header-title">PheasantPhasor <span>Dashboard</span></div>
+        <div class="header-badge">- Interacting with sampled waveform data -</div>
     </header>
 
-    <!-- =-=-=-=-= SETUP GUIDE (collapsed by default) =-=-=-=-= -->
+    <!-- =-=-=-=-= SETUP GUIDE =-=-=-=-= -->
     <div id="page-container">
 
-        <!-- setup gyide popup -->
+        <!-- setup guide popup -->
         <dialog id="guide-dialog">
 
             <form method="dialog">
@@ -49,34 +52,50 @@
                     <div class="setup-body">
 
                         <h2>Overview</h2>
-                        <p>x</p>
+                        <p>This dashboard shows a live view of the OpenPMU sampled-value (SV) stream, published over
+                            MQTT and forwarded to the browser over a WebSocket connection.</p>
 
-                        <h2>Step 1. x</h2>
-                        <p>Normal text
-                            <code>Code text</code>
+                        <h2>Step 1. Start the pipeline</h2>
+                        <p>Make sure Mosquitto, WaveMU, and ADCtoMQTT are all running before
+                            starting this dashboard. The connection indicator will show
+                            <code>Reconnecting...</code> until frames start arriving.
+                        </p>
+
+                        <h2>Step 2. Reading the chart</h2>
+                        <p>Drag on the chart to zoom into a time range. Double-click, or use
+                            <code>Reset Zoom</code>, to return to the live window.
                         </p>
 
                         <table class="stats-table setup-table">
                             <thead>
                                 <tr>
-                                    <th>x</th>
-                                    <th>(0) Input</th>
-                                    <th>(1) Output</th>
+                                    <th>Control</th>
+                                    <th>Effect</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Type</td>
-                                    <td>TCP Client</td>
-                                    <td>TCP Server</td>
+                                    <td>Pause / Resume</td>
+                                    <td>Freezes the chart on the current view. Data keeps arriving in the
+                                        background.</td>
+                                </tr>
+                                <tr>
+                                    <td>Drag on chart</td>
+                                    <td>Zoom into the selected time range.</td>
+                                </tr>
+                                <tr>
+                                    <td>Reset Zoom</td>
+                                    <td>Return to the full live scrolling window.</td>
+                                </tr>
+                                <tr>
+                                    <td>Channel checkboxes </td>
+                                    <td>Show or hide individual channel traces.</td>
                                 </tr>
                             </tbody>
                         </table>
 
-
-                        <p class="setup-note">setup note</p>
-
-                        <p class="setup-note">note <code>code</code></p>
+                        <p class="setup-note">Channels appear automatically as soon as the first frame containing
+                            them is received.</p>
 
                     </div>
                 </div>
@@ -90,28 +109,52 @@
 
         <div class="dashboard-grid">
 
-            <!-- =-=-=-=-= CARD 1 =-=-=-=-= -->
-            <div class="card">
-                <h1>Card 1</h1>
-            </div>
+            <!-- =-=-=-=-= CARD 1: LIVE WAVEFORM =-=-=-=-= -->
+            <div class="card card-wide">
+                <div class="card-header-row">
+                    <h1>Live Waveform</h1>
+                    <div class="conn-status">
+                        <span id="conn-dot" class="conn-dot conn-dot-down"></span>
+                        <span id="conn-label">Connecting...</span>
+                    </div>
+                </div>
 
-            <!-- =-=-=-=-= CARD 2 =-=-=-=-= -->
-            <div class="card">
-                <h1>Card 2</h1>
+                <div class="chart-toolbar">
+                    <button id="start-pipeline-btn" class="navButton chart-btn" type="button">Start Pipeline</button>
+                    <button id="pause-btn" class="navButton chart-btn" type="button">Pause</button>
+                    <button id="reset-zoom-btn" class="navButton chart-btn" type="button">Reset Zoom</button>
+                    <span id="pipeline-status" class="pipeline-status"></span>
+                </div>
+
+                <div id="data-time-display" class="data-time-display">Waiting for data...</div>
+
+                <div id="waveform-chart" class="waveform-chart"></div>
             </div>
         </div>
 
         <div class="dashboard-grid">
-            <!-- =-=-=-=-= CARD 3 =-=-=-=-= -->
+
+            <!-- =-=-=-=-= CARD 2: CHANNELS =-=-=-=-= -->
             <div class="card">
-                <h1>Card 3</h1>
+                <h1>Channels</h1>
+                <div id="channel-toggles" class="channel-toggles">
+                    <p class="setup-note">Waiting for the first frame...</p>
+                </div>
+            </div>
+
+            <!-- =-=-=-=-= CARD 3: STREAM STATS =-=-=-=-= -->
+            <div class="card">
+                <h1>Stream Stats</h1>
+                <div id="stream-stats" class="stream-stats">
+                    <p class="setup-note">No data yet.</p>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- =-=-=-=-= FOOTER =-=-=-=-= -->
     <footer>
-        <p>Footer</p>
+        <p>- - - - -</p>
     </footer>
 </body>
 
